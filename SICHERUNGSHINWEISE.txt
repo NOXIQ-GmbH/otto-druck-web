@@ -1,0 +1,25 @@
+OTTO-Druck | Druck & Medien
+Aktueller Website-Stand – offene Quelldateien
+
+Aktualisiert: 18.09.2026
+Gesicherte Site-Version: 13
+Quellstand: a480cab4d3d08189063cd76953b57087dbcbda22
+Website: https://otto-druck-dresden.info417927.chatgpt.site
+
+Letzte Ergänzungen:
+- Design & Medien: acht erweiterte Leistungsfelder mit grafischen Beispielen.
+- Webgestaltung: neue Seite, deutsche Bildtexte und drei Designstudien.
+- Dezente Scroll- und Hover-Animationen, reduzierte Bewegung berücksichtigt.
+- Frage zur selbstständigen Inhaltspflege entfernt.
+- Beide Seitendateien und das Stylesheet aktualisiert.
+- Neue Komponenten, Leistungsdaten und Ausbaudokumentation ergänzt.
+- Altes webdesign.webp durch webdesign-studio-de.png ersetzt.
+- Vier weitere Bilddateien ergänzt; die acht Grafikmotive liegen als Bildraster vor.
+- Die ungenutzte englische Zwischenfassung webdesign-studio.png wurde nicht übernommen.
+
+Bestehende Ordnerstruktur und unveränderte Dateien bleiben erhalten.
+Keine neue Komplett-ZIP: Änderungen wurden als einzelne Dateien gespeichert.
+Die Sicherung enthält Quellcode, Bilder, Konfiguration und Datenbankschema.
+Zum Wiederaufbau sind Installation und ein neuer Build erforderlich.
+Betriebsdaten wie Formularanfragen, Kundenuploads, Zugangsschlüssel und
+laufende Serverressourcen sind nicht Bestandteil dieser Quellprojektsicherung.

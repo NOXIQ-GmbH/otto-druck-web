@@ -1,0 +1,92 @@
+[
+  {
+    "name": "TU Dresden",
+    "source": "https://tu-dresden.de/++theme++tud.theme.webcms2/img/tud-logo-white-2025-v2.svg",
+    "note": "White SVG: use dark field or CSS monochrome treatment."
+  },
+  {
+    "name": "Dresdner Verkehrsbetriebe",
+    "source": "https://www.dvb.de/-/media/images/defaults/dvb-logo.jpg",
+    "note": ""
+  },
+  {
+    "name": "Dresdner Rennverein",
+    "source": "https://galopprennbahn-dresden-seidnitz.de/wp-content/themes/page-builder-framework-child/img/1890.svg",
+    "note": "Official DRV1890 emblem. Supplied old domain now an unaffiliated information page."
+  },
+  {
+    "name": "Glashütte Original",
+    "source": "https://www.glashuette-original.com/app/themes/go/public/images/logo-black.svg",
+    "note": ""
+  },
+  {
+    "name": "Dresdner Schlössernacht",
+    "source": "https://dresdner-schloessernacht.de/static-assets/images/dsn_logo_svg.svg",
+    "note": ""
+  },
+  {
+    "name": "Dresden Monarchs",
+    "source": "https://www.dresden-monarchs.de/files/theme/bg-monarchs-logo.png",
+    "note": "Official website CSS header emblem includes narrow blue banner."
+  },
+  {
+    "name": "IKEA Dresden, Chemnitz & Berlin",
+    "source": "https://www.ikea.com/global/assets/logos/brand/ikea.svg",
+    "note": ""
+  },
+  {
+    "name": "IHK Dresden",
+    "source": "https://www.ihk.de/blueprint/servlet/resource/crblob/5797078/b55a44635ee5dc47f4465d49d2bdceca/logo-ihk-svg-data.svg",
+    "note": ""
+  },
+  {
+    "name": "Frieling Verlag Berlin",
+    "source": "https://www.frieling.de/.cm4all/uproc.php/0/.logo.jpg/picture-1200?_=19b67d3c738",
+    "note": "Official website header logo is illustrated red bird carrying books."
+  },
+  {
+    "name": "PENTACON Dresden",
+    "source": "https://schneiderkreuznach.com/application/files/6117/8178/5255/Pentacon-Logo-Color.png",
+    "note": "Official parent Schneider-Kreuznach asset linked from redirected pentacon.de."
+  },
+  {
+    "name": "Li-iL Arzneimittel",
+    "source": "https://www.li-il.de/wp-content/uploads/2022/02/Liil_Logo.svg",
+    "note": ""
+  },
+  {
+    "name": "AUDI Dresden",
+    "source": "https://www.vgrdd.de/images/markenlogos/audi.png",
+    "note": ""
+  },
+  {
+    "name": "Volkswagen Dresden",
+    "source": "https://www.vgrdd.de/images/markenlogos/volkswagen.png",
+    "note": ""
+  },
+  {
+    "name": "Škoda Rüdiger",
+    "source": "https://www-ruediger-dresden.skoda-auto.de/pics/logo.png",
+    "note": "Official Autohaus Rüdiger website uses generic Škoda wordmark."
+  },
+  {
+    "name": "MIELE-Mai Dresden",
+    "source": "https://www.mai-und-soehne.de/media/33/36/a6/1692275089/logo.svg?ts=1692275089",
+    "note": "Official Mai und Söhne retailer logo, not generic Miele."
+  },
+  {
+    "name": "Stiftung VorsorgeDatenbank",
+    "source": "https://image.jimcdn.com/app/cms/image/transf/dimension=680x10000:format=gif/path/s12291dd5007affa7/image/i68c223d2b6f163ca/version/1611005768/image.gif",
+    "note": ""
+  },
+  {
+    "name": "Semperopernball",
+    "source": "https://semperopernball.de/cdn/shop/files/SOB_Logo_Gold_2026_V1.png?width=900",
+    "note": ""
+  },
+  {
+    "name": "Hutball Dresden",
+    "source": "https://www.hutball.de/site/assets/files/1/hutball_2027.1200x0.png",
+    "note": "Authentic official 2027 event poster including wordmark, NOT an isolated logo. Do not call it clean logo."
+  }
+]

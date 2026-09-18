@@ -1,0 +1,3 @@
+import {ArrowUpRight} from "lucide-react";
+import {products} from "@/lib/products";
+export function ProductGrid(){return <div className="product-grid">{products.map((p,i)=><a className={`product-card product-${i}`} href={`/produkte/${p.slug}`} key={p.slug}><div className="product-image"><img src={`/assets/${p.image}.webp`} width="1000" height="700" loading="lazy" alt={`${p.title} – beispielhafte Produktgestaltung`}/><span className="hover-frame"/><span className="image-action">Entdecken <ArrowUpRight size={18}/></span></div><div className="product-caption"><h3>{p.title}</h3><ArrowUpRight size={20}/></div></a>)}</div>}

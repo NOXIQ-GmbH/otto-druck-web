@@ -1,0 +1,11 @@
+"use client";
+import { useEffect,useState } from "react";
+import { X, ShieldCheck } from "lucide-react";
+import { Dialog,DialogContent,DialogTitle,DialogDescription } from "@/components/ui/dialog";
+
+export default function CookieConsent(){
+ const [banner,setBanner]=useState(false);const [settings,setSettings]=useState(false);
+ useEffect(()=>{try{setBanner(!localStorage.getItem("otto-cookie-choice"));}catch{setBanner(true);}const open=()=>setSettings(true);window.addEventListener("otto:privacy",open);return()=>window.removeEventListener("otto:privacy",open);},[]);
+ function save(choice:string){try{localStorage.setItem("otto-cookie-choice",JSON.stringify({choice,version:2,date:new Date().toISOString()}));}catch{}setBanner(false);setSettings(false);}
+ return <>{banner&&<aside className="cookie-banner" aria-label="Datenschutzeinstellungen"><div><ShieldCheck size={22}/><h2>Ihre Privatsphäre hat Vorrang.</h2><button className="cookie-dismiss" aria-label="Ohne Auswahl weiter" onClick={()=>setBanner(false)}><X size={19}/></button></div><p>Aktuell nutzen wir keine Analyse- oder Werbedienste. Nur Ihre Auswahl wird lokal gespeichert. Ohne Auswahl bleibt optionales Tracking aus.</p><div className="cookie-actions"><button onClick={()=>save("necessary")}>Nur notwendige</button><button onClick={()=>save("all")}>Alle akzeptieren</button><button className="cookie-settings" onClick={()=>setSettings(true)}>Einstellungen</button></div><a href="/datenschutz">Datenschutzerklärung</a></aside>}<Dialog open={settings} onOpenChange={setSettings}><DialogContent className="privacy-dialog"><DialogTitle>Cookie-Einstellungen</DialogTitle><DialogDescription>Sie entscheiden über optionale Dienste. Ihre Auswahl können Sie im Fußbereich jederzeit erneut öffnen.</DialogDescription><div className="privacy-row"><div><h3>Notwendige Speicherung</h3><p>Merkt Ihre Auswahl in diesem Browser.</p></div><strong>Immer aktiv</strong></div><div className="privacy-row"><div><h3>Analyse & Marketing</h3><p>Derzeit sind keine solchen Dienste eingebunden.</p></div><strong>Inaktiv</strong></div><button className="button black" onClick={()=>save("necessary")}>Nur notwendige speichern</button><a href="/datenschutz">Zur Datenschutzerklärung</a></DialogContent></Dialog></>;
+}

@@ -23,3 +23,5 @@ Die Sicherung enthält Quellcode, Bilder, Konfiguration und Datenbankschema.
 Zum Wiederaufbau sind Installation und ein neuer Build erforderlich.
 Betriebsdaten wie Formularanfragen, Kundenuploads, Zugangsschlüssel und
 laufende Serverressourcen sind nicht Bestandteil dieser Quellprojektsicherung.
+
+Cloudflare-Verbindung eingerichtet: 18.09.2026

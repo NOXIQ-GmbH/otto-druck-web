@@ -20,12 +20,15 @@ export async function sendIntakeMail(id:string,name:string,email:string,details:
       return true;
     }catch{console.error('Intake mail unavailable',id);return false;}
   }
+  const customerName=name.replace(/[\r\n\t]+/g,' ').trim();
+  const greeting=customerName ? `Guten Tag ${customerName},` : 'Guten Tag,';
+  const signature=`Mit besten Grüßen\n\nOtto-Druck (NOXIQ GmbH)\nMeschwitzstraße 1\n01099 Dresden\nMobil: 01 76 – 85 250 200\nTel.: 03 51 – 501 49 04\nE-Mail: ${to}`;
   const summary=Object.entries(details).filter(([key,value])=>value&&!key.startsWith('_')).map(([key,value])=>`${labels[key]||key}: ${value}`).join('\n');
   const [owner,customer]=await Promise.all([
     send(to,`OTTO-Druck: ${kind} ${id}`,`Neue ${kind}\nReferenz: ${id}\nName: ${name}\nE-Mail: ${email}\n\n${summary}\n\nDie Angaben wurden gespeichert.`,email),
     send(email,`OTTO-Druck – Ihre Referenz ${id}`,kind==='Anfrage'
-      ?`Vielen Dank für Ihre Anfrage bei OTTO-Druck.\n\nIhre Referenz: ${id}\n\nWir haben Ihre Anfrage gespeichert und melden uns persönlich bei Ihnen. Dies ist keine Auftragsbestätigung.\n\nDruckdaten noch nicht bereit? Sie können die Dateien später über diesen Link nachreichen:\n${upload}\nBitte verwenden Sie dieselbe E-Mail-Adresse. Wenn Sie keine Druckdaten haben, besprechen wir die Gestaltung mit Ihnen.\n\nKontakt: ${to} · 0351 501 49 04`
-      :`Vielen Dank. Ihre Druckdaten wurden gespeichert.\n\nUpload-Referenz: ${id}\nAnfragereferenz: ${details.reference||'nicht angegeben'}\n\nEine Druckfreigabe ist damit noch nicht erteilt.\nKontakt: ${to} · 0351 501 49 04`,to)
+      ?`${greeting}\n\nvielen Dank für Ihre Anfrage bei OTTO-Druck.\n\nIhre Referenz: ${id}\n\nWir haben Ihre Anfrage gespeichert und melden uns persönlich bei Ihnen. Dies ist keine Auftragsbestätigung.\n\nDruckdaten noch nicht bereit? Sie können die Dateien später über diesen Link nachreichen:\n${upload}\nBitte verwenden Sie dieselbe E-Mail-Adresse. Wenn Sie keine Druckdaten haben, besprechen wir die Gestaltung mit Ihnen.\n\n${signature}`
+      :`${greeting}\n\nvielen Dank. Ihre Druckdaten wurden gespeichert.\n\nUpload-Referenz: ${id}\nAnfragereferenz: ${details.reference||'nicht angegeben'}\n\nEine Druckfreigabe ist damit noch nicht erteilt.\n\n${signature}`,to)
   ]);
   return {owner,customer};
 }

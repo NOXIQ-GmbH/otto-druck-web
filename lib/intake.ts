@@ -1,7 +1,7 @@
 import {env} from 'cloudflare:workers';
-import {getChatGPTUser} from '@/app/chatgpt-auth';
 export function storage(){if(!env.DB||!env.BUCKET)throw new Error('Storage unavailable');return {db:env.DB,bucket:env.BUCKET};}
-export async function isOwner(){const user=await getChatGPTUser();return user?.email.toLowerCase()==='info@vemiwo.immo';}
+// Standalone Cloudflare: enable administration only after verified authentication is implemented.
+export async function isOwner(){return false;}
 export function textField(value:unknown,max=300){return typeof value==='string'?value.trim().slice(0,max):'';}
 export function validContact(name:string,email:string){return name.length>1&&email.length<=250&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);}
 export async function checkRequest(req:Request){const origin=req.headers.get('origin');if(!origin||origin!==new URL(req.url).origin)return false;return true;}

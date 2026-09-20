@@ -62,10 +62,11 @@ export function finishesFor(data:Record<string,string>):string[]{
  if(data.product==='Rollenetiketten'&&data.adhesion===removable)return uv;
  return m.finishes||[];
 }
-const specKeys=['quantity','format','customFormat','orientation','pages','color','paper','material','grammage','adhesion','finishing','coverMaterial','coverGrammage','delivery'];
+const specKeys=['quantity','format','customFormat','orientation','pages','color','printSides','backColor','paper','material','grammage','adhesion','finishing','coverMaterial','coverGrammage','delivery'];
 export function updatePrintData(data:Record<string,string>,key:string,value:string){
  const next={...data,[key]:value};
  if(key==='category'||key==='product') {for(const k of specKeys)delete next[k];if(key==='category')delete next.product;}
+ if(key==='printSides')delete next.backColor;
  if(key==='format'){delete next.customFormat;if(data.product==='Mappen'){delete next.material;delete next.grammage;delete next.finishing;}}
  if(key==='material'){delete next.grammage;delete next.adhesion;delete next.finishing;}
  if(key==='adhesion'||key==='grammage')delete next.finishing;
@@ -74,6 +75,11 @@ export function updatePrintData(data:Record<string,string>,key:string,value:stri
 }
 export function validatePrintOptions(data:Record<string,string>):string|null{
  const p=printProfile(data.category,data.product,data.format);
+ if(data.category==='Geschäftsausstattung'&&['Visitenkarten','Briefbogen'].includes(data.product)){
+  if(!['Einseitig','Beidseitig'].includes(data.printSides)||!p.colors.includes(data.color))return 'Bitte wählen Sie Bedruckung und Farbigkeit der Vorderseite.';
+  if(data.printSides==='Beidseitig'&&!p.colors.includes(data.backColor))return 'Bitte wählen Sie die Farbigkeit der Rückseite.';
+  if(data.printSides==='Einseitig'&&data.backColor)return 'Bei einseitiger Bedruckung bleibt die Rückseite unbedruckt.';
+ }else if(data.printSides||data.backColor)return 'Bitte prüfen Sie die Bedruckung für das gewählte Produkt.';
  for(const [key,options] of [['format',p.formats],['color',p.colors]] as const)if(data[key]&&!options.includes(data[key]))return 'Bitte prüfen Sie Format und Farbigkeit für das gewählte Produkt.';
  const m=p.materials.find(m=>m.name===data.material);
  if(data.material&&!m&&!p.freeMaterial)return 'Bitte wählen Sie ein zum Produkt passendes Material.';

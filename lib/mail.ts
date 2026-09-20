@@ -1,5 +1,5 @@
 import {env} from 'cloudflare:workers';
-const labels:Record<string,string>={category:'Bedarf',product:'Produkt',quantity:'Auflage',format:'Format',pages:'Seiten',color:'Farbigkeit',material:'Material',grammage:'Grammatur',adhesion:'Haftung',customFormat:'Wunschmaß',orientation:'Ausrichtung',coverMaterial:'Umschlagmaterial',coverGrammage:'Grammatur Umschlag',finishing:'Veredelung',delivery:'Lieferort',dataStatus:'Datenstand',company:'Firma',phone:'Telefon',message:'Weitere Wünsche',reference:'Anfragereferenz',files:'Dateien'};
+const labels:Record<string,string>={category:'Bedarf',product:'Produkt',quantity:'Auflage',format:'Format',pages:'Seiten',color:'Farbigkeit Vorderseite',printSides:'Bedruckung',backColor:'Farbigkeit Rückseite',material:'Material',grammage:'Grammatur',adhesion:'Haftung',customFormat:'Wunschmaß',orientation:'Ausrichtung',coverMaterial:'Umschlagmaterial',coverGrammage:'Grammatur Umschlag',finishing:'Veredelung',delivery:'Lieferort',dataStatus:'Datenstand',company:'Firma',phone:'Telefon',message:'Weitere Wünsche',reference:'Anfragereferenz',files:'Dateien'};
 type Details=Record<string,string>;
 export async function sendIntakeMail(id:string,name:string,email:string,details:Details,kind='Anfrage') {
   const config=env as unknown as {BREVO_API_KEY?:string;MAIL_FROM?:string;MAIL_TO?:string;PUBLIC_SITE_URL?:string};

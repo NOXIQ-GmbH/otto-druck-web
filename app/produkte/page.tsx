@@ -1,4 +1,4 @@
 import { Page,ContactCTA } from "@/components/site-chrome";
 import { ProductGrid } from "@/components/product-grid";
-export const metadata={title:"Druckprodukte"};
+export const metadata={title:"Druckprodukte",alternates:{canonical:"/produkte"}};
 export default function Products(){return <Page eyebrow="Druckprodukte" title="Fast alles, was sich bedrucken lässt." intro="Sie nennen uns Zweck, Menge, Termin und Budget. Wir finden Material, Format und Produktionsweg, die zu Ihrem Projekt passen." image="/assets/brochures.webp"><section className="content-section"><ProductGrid/><p className="small-note">Produktabbildungen zeigen Gestaltungsbeispiele. Jede Kategorie führt zu weiteren Informationen.</p></section><section className="note-band"><h2>Und was haben Sie vor?</h2><div><p>Auch Werbeartikel, Textilien, Kugelschreiber, Tassen, Gutscheine, Sonderformate und individuelle Konfektionierungen gehören zu unseren Möglichkeiten. Fragen Sie Ihr Wunschprodukt einfach an.</p><a className="text-link" style={{marginTop:20}} href="/kontakt">Wunschprodukt anfragen →</a></div></section><ContactCTA/></Page>}

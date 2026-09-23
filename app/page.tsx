@@ -1,6 +1,9 @@
+import type {Metadata} from "next";
 import {ArrowRight} from "lucide-react";
 import {Header,Footer,Process,ContactCTA} from "@/components/site-chrome";
 import {ProductGrid} from "@/components/product-grid";
+
+export const metadata:Metadata={alternates:{canonical:"/"}};
 
 export default function Home(){return <><Header/><main>
  <section className="home-hero"><img className="hero-background" src="/assets/hero.webp?v=original-mockup" alt="Illustrative Druckproduktion mit Gestaltungsmonitor und farbigem Druckbogen" fetchPriority="high" width="1536" height="1024"/><div className="hero-wash"/><div className="wrap hero-content"><p className="eyebrow">Ideen auf Papier. Seit 1925.</p><h1>Ihre Ideen<span className="cyan-dot">.</span><br/>In besten<br className="desktop-break"/> Farben<span className="magenta-dot">.</span></h1><p>Druckprodukte, Gestaltung und digitale Medien.<br/>Persönlich begleitet. Präzise umgesetzt.</p><a className="button magenta" href="/produkte">Druckprodukte entdecken <ArrowRight size={19}/></a><div className="hero-caption"><svg className="print-registration" width="38" height="30" viewBox="0 0 38 30" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth=".8"><circle cx="19" cy="15" r="6.5"/><path d="M1 15h36M19 1v28"/></svg> Qualität trifft Kreativität</div></div><div className="hero-registration" aria-hidden="true">C<br/>M<br/>Y<br/>K</div></section>

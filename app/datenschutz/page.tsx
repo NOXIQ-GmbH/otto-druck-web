@@ -1,4 +1,5 @@
 import { Page } from "@/components/site-chrome";
+export const metadata={title:"Datenschutzerklärung",alternates:{canonical:"/datenschutz"}};
 
 export default function Privacy() {
   return <Page eyebrow="Rechtliches" title="Datenschutzerklärung" intro="Informationen zur Verarbeitung personenbezogener Daten auf dieser Website.">

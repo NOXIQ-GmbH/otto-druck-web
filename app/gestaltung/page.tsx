@@ -1,7 +1,7 @@
 import {Page} from "@/components/site-chrome";
 import RevealGrid from "@/components/reveal-grid";
 import {ArrowRight} from "lucide-react";
-export const metadata={title:"Design & Medien – Logo, Grafik und Layout"};
+export const metadata={title:"Design & Medien – Logo, Grafik und Layout",alternates:{canonical:"/gestaltung"}};
 const services=[
 ["01","Logo & Markenauftritt","Vom ersten Zeichen bis zum stimmigen Gesamtbild: Wir entwickeln oder modernisieren Ihr Logo und stimmen Farben und Schriften aufeinander ab.","Logoentwicklung · Redesign · Corporate Design · Gestaltungsrichtlinien"],
 ["02","Geschäftsausstattung","Ein einheitlicher Auftritt im täglichen Kontakt – sorgfältig gestaltet und für den jeweiligen Einsatz vorbereitet.","Visitenkarten · Briefpapier · Umschläge · Mappen · Vorlagen","/assets/design-service-02.webp"],

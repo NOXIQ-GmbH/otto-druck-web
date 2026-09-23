@@ -1,4 +1,5 @@
 import { Page } from "@/components/site-chrome";
+export const metadata={title:"Allgemeine Geschäftsbedingungen",alternates:{canonical:"/agb"}};
 const sections = [
 ["§ 1 Geltungsbereich und Vertragsschluss", [
 "Diese Allgemeinen Geschäftsbedingungen gelten für Druck-, Gestaltungs-, Mailing- und Webleistungen der NOXIQ GmbH, Meschwitzstraße 1, 01099 Dresden, handelnd unter OTTO-Druck (Auftragnehmer). Sie gelten gegenüber Unternehmern und Verbrauchern; ausschließlich für Unternehmer oder Kaufleute bestimmte Regelungen sind entsprechend gekennzeichnet.",

@@ -57,3 +57,47 @@ body:has(.cookie-banner) .back-to-top{visibility:hidden}
 @media(max-width:1000px){.web-example-grid{grid-template-columns:1fr 1fr}.web-example-grid article:last-child{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;align-items:center}}
 @media(max-width:640px){.web-examples{padding-block:50px}.web-example-grid{grid-template-columns:1fr}.web-example-grid article:last-child{grid-column:auto;display:block}.design-process-image{margin:-24px -24px 24px}.web-example-caption{padding:24px}}
 @media(prefers-reduced-motion:reduce){.reveal-grid.reveal-ready>article,.reveal-grid.reveal-ready>article.is-visible,.web-example-grid article,.web-example-image img,.design-service-grid article,.design-process-image{opacity:1;transform:none!important;transition:none!important}.web-example-grid article:hover img{transform:none}}
+
+/* Transparent consent controls: familiar categories, accurate to the services in use. */
+.legal code{font-size:.92em;background:#edf1f3;padding:2px 5px;border-radius:4px}
+.cookie-banner{position:fixed;left:50%;right:auto;bottom:max(18px,env(safe-area-inset-bottom));z-index:45;transform:translateX(-50%);max-width:760px;width:calc(100% - 36px);padding:26px 28px 22px;border:1px solid #dce2e7;border-top:0;border-radius:14px;background:#fff;box-shadow:0 16px 60px #111a2440}
+.cookie-banner:after,.privacy-dialog:after{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:linear-gradient(90deg,var(--cyan) 0 33.33%,var(--magenta) 33.33% 66.66%,var(--yellow) 66.66%);border-radius:14px 14px 0 0}
+.cookie-banner-heading{display:flex;align-items:center;gap:13px}
+.cookie-shield{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;border-radius:50%;background:#e5f8fc;color:#007e9c}
+.cookie-kicker{margin:0 0 2px!important;font-size:.68rem!important;line-height:1.3!important;text-transform:uppercase;letter-spacing:.15em;color:#007e9c!important;font-weight:800}
+.cookie-banner h2{font-size:1.2rem;letter-spacing:-.025em;margin:0}
+.cookie-banner>p{font-size:.9rem;line-height:1.65;color:#4f5960;margin:15px 0 18px}
+.cookie-actions,.privacy-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:0}
+.cookie-actions button,.privacy-actions button,.privacy-actions a{min-height:46px;padding:11px 20px;border-radius:26px;font-size:.84rem;font-weight:700;text-align:center}
+.cookie-actions .cookie-primary,.privacy-actions .cookie-primary{border:1px solid var(--ink);background:var(--ink);color:#fff}
+.cookie-actions .cookie-primary:hover,.privacy-actions .cookie-primary:hover{background:#26323a}
+.cookie-actions .cookie-secondary,.privacy-actions .cookie-secondary{border:1px solid #9aa6ae;background:#fff;color:var(--ink);text-decoration:none}
+.cookie-actions .cookie-secondary:hover,.privacy-actions .cookie-secondary:hover{background:#edf9fd;border-color:#63aabd}
+.cookie-links{display:flex;gap:8px;align-items:center;margin-top:15px;color:#58636a;font-size:.78rem}
+.cookie-links a,.privacy-dialog a{text-decoration:underline;text-underline-offset:3px}
+.privacy-dialog{position:fixed;background:white;color:var(--ink);padding:34px;max-width:min(880px,calc(100vw - 30px))!important;max-height:min(760px,calc(100dvh - 30px));overflow-y:auto;border-radius:15px}
+.privacy-dialog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
+.privacy-dialog [data-slot=dialog-title]{font-size:clamp(1.65rem,3vw,2.15rem)}
+.privacy-dialog [data-slot=dialog-description]{max-width:720px;line-height:1.65;color:#505b63}
+.privacy-close{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;border:1px solid #cbd3d8;border-radius:50%;background:#fff;color:#3a444a}
+.privacy-close:hover{background:#f0f5f7}
+.privacy-categories{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid #d8dee2;border-radius:10px;overflow:hidden}
+.privacy-category{display:flex;min-width:0;min-height:210px;flex-direction:column;padding:22px 18px;background:#fff;border-left:1px solid #d8dee2}
+.privacy-category:first-child{border-left:0}
+.privacy-category.is-active{background:#f2fbfd}
+.privacy-category-title{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.privacy-category h3{font-size:1rem;margin:3px 0 12px}
+.privacy-category p{font-size:.82rem;line-height:1.55;color:#59646b;margin-bottom:18px}
+.privacy-category strong{margin-top:auto;font-size:.72rem;line-height:1.35;color:#006e88;text-transform:uppercase;letter-spacing:.05em}
+.privacy-switch{display:flex;align-items:center;width:42px;height:24px;flex:0 0 42px;padding:3px;border-radius:18px;background:#cbd2d6}
+.privacy-switch>span{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#fff;color:#fff}
+.privacy-category.is-active .privacy-switch{justify-content:flex-end;background:#008fab}
+.privacy-category.is-active .privacy-switch>span{background:#fff;color:#00768f}
+.privacy-notice{display:flex;align-items:flex-start;gap:12px;padding:15px 17px;background:#f2f6f8;border-left:3px solid var(--cyan)}
+.privacy-notice svg{flex:0 0 20px;color:#007f9e;margin-top:2px}
+.privacy-notice p{font-size:.84rem;line-height:1.55;margin:0;color:#48555d}
+.privacy-actions{align-items:center}
+.privacy-actions>*{flex:1}
+.privacy-saved{margin:0!important;font-size:.76rem;color:#667178;text-align:center}
+@media(max-width:760px){.privacy-categories{grid-template-columns:1fr 1fr}.privacy-category{min-height:175px;border-top:1px solid #d8dee2}.privacy-category:nth-child(odd){border-left:0}.privacy-category:nth-child(-n+2){border-top:0}}
+@media(max-width:480px){.cookie-banner{bottom:max(10px,env(safe-area-inset-bottom));width:calc(100% - 20px);padding:21px 18px 17px}.cookie-banner>p{font-size:.82rem}.cookie-actions button{width:100%;font-size:.8rem}.privacy-dialog{padding:27px 20px 22px;max-width:calc(100vw - 20px)!important;max-height:calc(100dvh - 20px)}.privacy-categories{grid-template-columns:1fr}.privacy-category{min-height:0;border-left:0;border-top:1px solid #d8dee2}.privacy-category:nth-child(2){border-top:1px solid #d8dee2}.privacy-actions{flex-direction:column}.privacy-actions>*{width:100%;flex:auto}.privacy-dialog [data-slot=dialog-title]{font-size:1.55rem}.privacy-close{width:38px;height:38px;flex-basis:38px}}

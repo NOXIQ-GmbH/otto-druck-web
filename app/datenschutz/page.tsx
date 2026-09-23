@@ -20,8 +20,11 @@ export default function Privacy() {
       <h2>5. Eingesetzte externe Dienste</h2>
       <p>Für den transaktionalen Versand der Bestätigungs- und Benachrichtigungs-E-Mails nutzen wir Brevo (Brevo / Sendinblue SAS, Frankreich) als Auftragsverarbeiter. Für das E-Mail-Postfach und den Empfang geschäftlicher Nachrichten nutzen wir STRATO AG, Deutschland. Beide Dienste erhalten nur die Daten, die für den jeweiligen E-Mail-Versand oder -Empfang erforderlich sind.</p>
       <p>Weitere externe Dienste, insbesondere Analyse-, Marketing-, Social-Media- oder eingebettete Mediendienste, sind in der aktuellen Fassung dieser Website nicht eingebunden.</p>
-      <h2>6. Cookies und lokale Speicherung</h2>
-      <p>Diese Website speichert Ihre Cookie-Auswahl lokal in Ihrem Browser. Diese technisch notwendige Speicherung dient dazu, Ihre Auswahl zu beachten. Die Information bleibt auf Ihrem Gerät, bis Sie sie selbst über die Browserdaten löschen oder eine neue Auswahl treffen. Optionale Cookies werden in der aktuellen Fassung nicht eingesetzt.</p>
+      <h2>6. Cookies, Einwilligungsverwaltung und lokale Speicherung</h2>
+      <p>In der aktuellen Fassung dieser Website setzen wir keine Analyse-, Marketing-, Präferenz- oder sonstigen optionalen Cookies ein. Es findet weder eine Reichweitenmessung noch ein websiteübergreifendes Tracking statt.</p>
+      <p>Damit der Datenschutzhinweis nach Ihrer Auswahl nicht bei jedem Seitenaufruf erneut erscheint, speichern wir ausschließlich den Eintrag <code>otto-cookie-choice</code> im lokalen Speicher Ihres Browsers (Local Storage). Der Eintrag enthält die gewählten Kategorien, die Version des Hinweises sowie Zeitpunkt und Ablaufdatum der Auswahl. Er wird nicht an uns übertragen und enthält keine Namen, Kontaktdaten oder sonstigen Eingaben.</p>
+      <p>Die Speicherung ist für die von Ihnen gewünschte Verwaltung der Datenschutzeinstellungen erforderlich und gilt höchstens zwölf Monate. Danach oder nach einer inhaltlichen Änderung des Hinweises fragen wir erneut. Sie können Ihre aktuelle Einstellung jederzeit über „Cookie-Einstellungen“ im Fußbereich einsehen und erneut speichern. Durch das Löschen der Browserdaten entfernen Sie den Eintrag sofort.</p>
+      <p>Sollten künftig optionale Dienste hinzukommen, werden diese erst nach einer gesonderten, informierten Einwilligung aktiviert. Eine ältere Auswahl wird nicht automatisch auf neue Dienste oder Zwecke erweitert.</p>
       <h2>7. Empfänger und Auftragsverarbeitung</h2>
       <p>Empfänger personenbezogener Daten sind, soweit erforderlich, Cloudflare für Hosting, Datenbank und Dateispeicher, Brevo für den Versand transaktionaler E-Mails sowie STRATO für den Empfang geschäftlicher E-Mails. Mit Dienstleistern, die Daten in unserem Auftrag verarbeiten, werden Verträge zur Auftragsverarbeitung geschlossen, soweit dies gesetzlich erforderlich ist.</p>
       <h2>8. Speicherdauer</h2>
@@ -32,7 +35,7 @@ export default function Privacy() {
       <p>Sie können sich bei einer Datenschutzaufsichtsbehörde beschweren. Zuständig ist insbesondere der Sächsische Datenschutz- und Transparenzbeauftragte.</p>
       <h2>11. Sicherheit und Aktualisierung</h2>
       <p>Wir setzen angemessene technische und organisatorische Maßnahmen ein. Diese Erklärung wird angepasst, wenn sich Funktionen, Dienstleister oder Rechtslage ändern.</p>
-      <p className="legal-warning"><strong>Stand:</strong> 19. September 2026</p>
+      <p className="legal-warning"><strong>Stand:</strong> 23. September 2026</p>
     </section>
   </Page>;
 }

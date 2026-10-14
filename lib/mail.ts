@@ -32,3 +32,35 @@ export async function sendIntakeMail(id:string,name:string,email:string,details:
   ]);
   return {owner,customer};
 }
+
+
+export async function sendContactMail(name:string,email:string,details:{company:string;phone:string;message:string}) {
+  const config=env as unknown as {BREVO_API_KEY?:string;MAIL_FROM?:string;MAIL_TO?:string};
+  const from=config.MAIL_FROM||'post@otto-druck.de';
+  const to=config.MAIL_TO||'post@otto-druck.de';
+  if(!config.BREVO_API_KEY){console.error('Contact mail not configured');return {owner:false,customer:false};}
+  async function send(recipient:string,subject:string,textContent:string,replyTo:string){
+    try{
+      const response=await fetch('https://api.brevo.com/v3/smtp/email',{
+        method:'POST',signal:AbortSignal.timeout(10000),
+        headers:{'api-key':config.BREVO_API_KEY!,'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify({sender:{name:'OTTO-Druck',email:from},to:[{email:recipient}],replyTo:{email:replyTo},subject,textContent})
+      });
+      if(!response.ok){console.error('Contact mail rejected',response.status);return false;}
+      return true;
+    }catch{console.error('Contact mail unavailable');return false;}
+  }
+  const safeName=name.replace(/[\r\n\t]+/g,' ').trim();
+  const safeCompany=details.company.replace(/[\r\n\t]+/g,' ').trim();
+  const safePhone=details.phone.replace(/[\r\n\t]+/g,' ').trim();
+  const safeMessage=details.message.trim();
+  const greeting=safeName ? `Guten Tag ${safeName},` : 'Guten Tag,';
+  const signature=`Mit besten Grüßen\n\nOTTO-Druck – eine Marke der NOXIQ GmbH\nMeschwitzstraße 1\n01099 Dresden\nMobil: 01 76 – 80 250 200\nTel.: 03 51 – 501 49 04\nE-Mail: ${to}`;
+  const ownerText=`Neue Kontaktanfrage über otto-druck.de\n\nName: ${safeName}\nFirma: ${safeCompany||'nicht angegeben'}\nE-Mail: ${email}\nTelefon: ${safePhone||'nicht angegeben'}\n\nNachricht:\n${safeMessage}`;
+  const customerText=`${greeting}\n\nvielen Dank für Ihre Nachricht an OTTO-Druck. Wir haben Ihre Anfrage erhalten und melden uns persönlich bei Ihnen.\n\nIhre Nachricht:\n${safeMessage}\n\n${signature}`;
+  const [owner,customer]=await Promise.all([
+    send(to,'OTTO-Druck: Neue Kontaktanfrage',ownerText,email),
+    send(email,'OTTO-Druck – Ihre Nachricht ist eingegangen',customerText,to)
+  ]);
+  return {owner,customer};
+}

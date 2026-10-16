@@ -8,6 +8,13 @@
       "when": 1789570828316,
       "tag": "0000_wonderful_mindworm",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1792159717813,
+      "tag": "0001_spam_protection",
+      "breakpoints": true
     }
   ]
 }

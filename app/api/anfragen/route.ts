@@ -1,11 +1,30 @@
 import {newReference} from '@/lib/reference';
 import {sendIntakeMail} from '@/lib/mail';
 import {validatePrintOptions} from '@/lib/print-options';
-import {storage,textField,validContact,checkRequest,rateKey,limited,cleanup,noStore,boundedBody} from '@/lib/intake';
-export async function POST(req:Request){try{if(!await checkRequest(req))return Response.json({error:'Ungültiger Ursprung.'},{status:403});if(Number(req.headers.get('content-length'))>20000)return Response.json({error:'Die Anfrage ist zu groß.'},{status:413});const raw=await (await boundedBody(req,20000)).json();if(!raw||typeof raw!=="object"||Array.isArray(raw))return Response.json({error:"Ungültige Angaben."},{status:400});const data=raw as Record<string,unknown>;const name=textField(data.name),email=textField(data.email,250);if(!validContact(name,email)||!textField(data.category)||!textField(data.product)||data.privacy!==true)return Response.json({error:'Bitte ergänzen Sie Name, gültige E-Mail, Bedarf und Produkt.'},{status:400});const key=await rateKey(req);if(await limited(key))return Response.json({error:'Zu viele Anfragen. Bitte versuchen Sie es später erneut oder rufen Sie uns an.'},{status:429});const allowed=['category','product','quantity','format','pages','color','printSides','backColor','paper','material','grammage','adhesion','customFormat','orientation','coverMaterial','coverGrammage','finishing','delivery','dataStatus','company','phone','message'];const details=Object.fromEntries(allowed.map(k=>[k,textField(data[k],k==='message'?4000:500)]));const optionError=validatePrintOptions(details);if(optionError)return Response.json({error:optionError},{status:400});let id=newReference();const now=Date.now();await cleanup();for(let attempt=0;;attempt++){
-try{await storage().db.prepare('INSERT INTO submissions (id,kind,name,email,details,created,expires,rate_key) VALUES (?,?,?,?,?,?,?,?)').bind(id,'Anfrage',name,email,JSON.stringify({...details,_notification:'pending'}),now,now+90*86400000,key).run();break;}
-catch(error){if(attempt>=4||!String(error).includes('UNIQUE constraint failed: submissions.id'))throw error;id=newReference();}}
-let mail={owner:false,customer:false};
-try{mail=await sendIntakeMail(id,name,email,details);}catch{console.error('Notification failed',id);}
-try{await storage().db.prepare('UPDATE submissions SET details=? WHERE id=?').bind(JSON.stringify({...details,_notification:JSON.stringify(mail)}),id).run();}catch{console.error('Notification status not saved',id);}
-return Response.json({id,emailSent:mail.customer},{headers:noStore});}catch(e){if(e instanceof RangeError)return Response.json({error:'Die Anfrage ist zu groß.'},{status:413});console.error('Inquiry storage failed',e);return Response.json({error:'Ihre Anfrage konnte nicht gespeichert werden. Ihre Eingaben bleiben erhalten. Bitte versuchen Sie es erneut.'},{status:503,headers:noStore});}}
+import {categories} from '@/lib/intake-config';
+import {cleanup,noStore,boundedBody} from '@/lib/intake';
+import {begin,protect,reserve,complete,fail} from '@/lib/protection/otto';
+import {field,ProtectionError,DAY} from '@/lib/protection/core';
+import {object,contact,proofFields,inquiryFields} from '@/lib/protection/schemas';
+export async function POST(req:Request){
+  try{
+    const a=await begin(req,'anfragen');
+    const data=object(await (await boundedBody(req,20000)).json(),['name','email','privacy',...inquiryFields,...proofFields]);
+    const {name,email}=contact(data);
+    const details=Object.fromEntries(inquiryFields.map(k=>[k,field(data[k],k==='message'?4000:k==='phone'?60:500,false,k==='message')]));
+    if(data.privacy!==true||!categories[details.category]?.includes(details.product))throw new ProtectionError(400,'invalid_product','Bitte prüfen Sie Bedarf, Produkt und Datenschutzhinweis.');
+    for(const key of ['quantity','pages'])if(details[key]&&(!/^\d{1,9}$/.test(details[key])||Number(details[key])<1))throw new ProtectionError(400,'invalid_quantity','Bitte prüfen Sie Auflage und Seitenzahl.');
+    const optionError=validatePrintOptions(details);if(optionError)throw new ProtectionError(400,'invalid_options',optionError);
+    await protect(a,data);
+    await cleanup();
+    const job=await reserve(a,{name,email,...details},email,newReference());
+    if(job.duplicate)return Response.json(job.result,{headers:noStore});
+    const now=Date.now();
+    await a.db.prepare('INSERT INTO submissions(id,kind,name,email,details,created,expires,rate_key) VALUES (?,?,?,?,?,?,?,?)').bind(job.id,'Anfrage',name,email,JSON.stringify(details),now,now+90*DAY,a.subject).run();
+    const mail=await sendIntakeMail(job.id,name,email,details);
+    await a.db.prepare('UPDATE submissions SET details=? WHERE id=?').bind(JSON.stringify({...details,_notification:JSON.stringify(mail)}),job.id).run();
+    const result={id:job.id,emailSent:mail.customer,ownerMailAccepted:mail.owner};
+    await complete(a,job.id,result);
+    return Response.json(result,{headers:noStore});
+  }catch(e){return fail(req,'anfragen',e);}
+}

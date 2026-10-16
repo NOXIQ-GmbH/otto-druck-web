@@ -1,0 +1,8 @@
+{
+  "name": "otto-druck-spam-maintenance",
+  "main": "spam-maintenance.ts",
+  "compatibility_date": "2026-05-15",
+  "triggers": {"crons": ["*/15 * * * *"]},
+  "d1_databases": [{"binding":"DB","database_name":"otto-druck-db","database_id":"75a3c772-243a-4705-b80f-339699f2f37e"}],
+  "r2_buckets": [{"binding":"BUCKET","bucket_name":"otto-druck-uploads"}]
+}

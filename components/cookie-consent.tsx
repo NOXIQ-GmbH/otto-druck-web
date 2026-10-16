@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 
 const STORAGE_KEY = "otto-cookie-choice";
-const CONSENT_VERSION = 3;
+const CONSENT_VERSION = 4;
 const CONSENT_LIFETIME = 365 * 24 * 60 * 60 * 1000;
 
 type ConsentChoice = {
@@ -27,7 +27,7 @@ const categories = [
   {
     key: "necessary",
     title: "Notwendig",
-    description: "Speichert ausschließlich Ihre Datenschutzauswahl in diesem Browser.",
+    description: "Speichert Ihre Datenschutzauswahl. Beim Absenden öffentlicher Formulare wird der technisch erforderliche Missbrauchsschutz ausgeführt.",
     status: "Immer aktiv",
     active: true,
   },

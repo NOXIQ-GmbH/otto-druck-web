@@ -2,7 +2,7 @@
 
 Stand: 16. Oktober 2026. Repository: `NOXIQ-GmbH/otto-druck-web`.
 
-**Status: lokal implementiert und geprüft, NICHT produktiv aktiviert.** Es wurde nichts deployt oder gepusht. Live-WAF-Regeln, Turnstile-Einrichtung, Brevo-Absenderverifikation und tatsächliche Zustellung sind nicht nachgewiesen. Keine Freigabe zur Produktionsaktivierung liegt vor.
+**Status: lokal implementiert und geprüft, NICHT produktiv aktiviert.** Es wurde nichts produktiv deployt. Die GitHub-Übernahme erfolgt ausschließlich über den Arbeitsbranch; `main` bleibt unverändert. Live-WAF-Regeln, Turnstile-Einrichtung, Brevo-Absenderverifikation und tatsächliche Zustellung sind nicht nachgewiesen. Keine Freigabe zur Produktionsaktivierung liegt vor.
 
 ## 1. Tatsächlicher Ausgangsstand
 
@@ -112,7 +112,7 @@ Die Route-Tests verwenden eine echte SQLite-Datenbank im Speicher als D1-Adapter
 
 Ergebnisse:
 
-- **30/30 Server-Szenarien bestanden:** legitimer Kontakt, fünfstufige Anfragedaten, gültiger Upload, fehlende/ungültige/abgelaufene/wiederverwendete Tokens, Host/Aktion/Zeitabweichung, Honeypot, signierte Zeitgrenzen, direkte/cross-origin HTTP-Aufrufe, abgelehnte Versuche im Zähler, parallele Zähler/Jobs/Tokens/Uploads/Mailclaims, Duplikate, Turnstile-Ausfall, Brevo-Ausfall/Ablehnung/unklare Antwort, unbestätigter Absender, Bestätigungs-/globale Budgets, strikte Schemas/Header-Injection, Uploadgrenzen, Formatfälschung/Archive/Dateinamen, R2-Fehler/Rollback einschließlich Teilübertragung und Dateierhalt bei anschließendem Mailfehler, Quarantäne/Downloads, Löschung, loopbackbeschränkter Testmodus und datensparsame Ereignisse.
+- **31/31 Server-Szenarien bestanden:** legitimer Kontakt, fünfstufige Anfragedaten, gültiger Upload, fehlende/ungültige/abgelaufene/wiederverwendete Tokens, Host/Aktion/Zeitabweichung, Honeypot, signierte Zeitgrenzen, direkte/cross-origin HTTP-Aufrufe, abgelehnte Versuche im Zähler, parallele Zähler/Jobs/Tokens/Uploads/Mailclaims, Duplikate, Turnstile-Ausfall, Brevo-Ausfall/Ablehnung/unklare Antwort, unbestätigter Absender, Bestätigungs-/globale Budgets, strikte Schemas/Header-Injection, Uploadgrenzen, Formatfälschung/Archive/Dateinamen, R2-Fehler/Rollback einschließlich Teilübertragung und Dateierhalt bei anschließendem Mailfehler, Quarantäne/Downloads, Löschung, loopbackbeschränkter Testmodus, datensparsame Ereignisse und eine zusätzliche Konfigurationsmatrix über alle öffentlichen Handler.
 - **9/9 Browser-Szenarien bestanden:** Kontaktfehler mit Eingabeerhalt und frischem Retry-Token, fünf Schritte ohne Zwischenchallenge und Upload-Header/Quarantäneanzeige, jeweils bei 320×800, 768×1024 und 1440×1000. Headless Chromium; Widget-API und Submit-Antworten kontrolliert simuliert. Keine Aussage über eine echte Turnstile-Challenge oder reale Mailzustellung.
 - TypeScript-Prüfung, Website-Produktionsbuild und Wartungsworker-Dry-Run bestanden.
 - Neue Migration lokal angewandt. Keine entfernte D1-Migration ausgeführt. Lokaler HTTP-Aufruf ohne Schutzkonfiguration liefert kontrolliert 503, statt E-Mails ohne Prüfung auszulösen.
@@ -139,7 +139,7 @@ Diese Schritte wurden **nicht** ausgeführt; es gab keine eigenmächtige Liveän
 
 ## 9. Entwicklungsbranch und Commits
 
-Branch: `feat/otto-druck-spamschutz-v1`. Die Implementierung wird als eigener Commit dokumentiert; die vollständige Kennung steht im abschließenden Prüfprotokoll/Chat und ist mit `git log -1` abrufbar. Keine Übernahme aus dem Kundenportal und keine Änderung am separaten Kundenportal-Repository. Kein Push/PR/Deployment im Rahmen dieser lokalen Freigabevorbereitung.
+Branch: `feat/otto-druck-spamschutz-v1`. Die Implementierung wird als eigener Commit dokumentiert; die vollständige Kennung steht im abschließenden Prüfprotokoll/Chat und ist mit `git log -1` abrufbar. Keine Übernahme aus dem Kundenportal und keine Änderung am separaten Kundenportal-Repository. Der Folgeauftrag autorisiert den Push dieses Arbeitsbranches zu GitHub. Kein Merge nach `main` und kein Deployment. Der ursprüngliche Implementierungscommit ist `5d89c73ccd0bc1c2ad5899f7218bc634f1100922`; die anschließende Übernahmeprüfung ist separat committet. Alle Commits sind mit `git log origin/main..HEAD` nachvollziehbar. Details und Dateiliste: `docs/spamschutz-uebernahme-2026-10-16.md`.
 
 ## 10. Folgeauftrag NOXIQ Portal Core
 

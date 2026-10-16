@@ -7,7 +7,7 @@ import {POST as inquiryRoute} from '../app/api/anfragen/route.ts';
 import {POST as uploadRoute} from '../app/api/druckdaten/route.ts';
 import {POST as bootstrapRoute} from '../app/api/formularschutz/route.ts';
 import {GET as downloadRoute} from '../app/api/verwaltung/[id]/route.ts';
-import {issueTicket,hmac,counter,verifyBot,ProtectionError,claimJob,DAY} from '../lib/protection/core.ts';
+import {issueTicket,hmac,counter,ProtectionError,claimJob} from '../lib/protection/core.ts';
 import {inspectFile} from '../lib/protection/files.ts';
 import {sendContactMail} from '../lib/mail.ts';
 import maintenance from '../cloudflare/spam-maintenance.ts';
@@ -219,4 +219,16 @@ test('mail outage after complete upload does not undo quarantined files or chang
  const f=fixture();f.setMode('mail-down');const response=await upload(f);assert.equal(response.status,200);const result=await response.json();
  assert.equal(f.objects.size,1);assert.equal(rows('mail_deliveries')[0].state,'unknown');assert.equal(rows('files')[0].scan_status,'pending_scan');
  f.setMode('ok');const retry=await upload(f);assert.equal(retry.status,200);assert.equal((await retry.json()).id,result.id);assert.equal(f.mails.length,1);assert.equal(f.objects.size,1);
+});
+
+test('disabled, missing or wrong protection configuration blocks every public handler without side effects',async()=>{
+ const cases=[['SPAM_MODE',undefined],['SPAM_MODE','disabled'],['TURNSTILE_SITEKEY',undefined],['TURNSTILE_SECRET_KEY',undefined],['SPAM_HMAC_SECRET','short'],['TURNSTILE_HOSTNAMES','wrong.example.test']];
+ for(const [key,value] of cases){
+  const f=fixture();if(value===undefined)delete f.env[key];else f.env[key]=value;
+  for(const [handler,path,body] of [[contactRoute,'kontakt',{}],[inquiryRoute,'anfragen',{}],[uploadRoute,'druckdaten',{}],[bootstrapRoute,'formularschutz',{form:'kontakt'}]]){
+   const response=await handler(request('/api/'+path,body));assert.equal(response.status,503,key+' / '+path);
+  }
+  assert.equal(f.botRequests.length,0);assert.equal(f.mails.length,0);assert.equal(f.objects.size,0);assert.equal(rows('submissions').length,0);
+  sql.close();sql=undefined;
+ }
 });

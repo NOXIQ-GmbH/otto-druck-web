@@ -13,7 +13,7 @@ vielen Dank für Ihre Nachricht.
 
 OTTO-Druck nimmt derzeit keine Bewerbungen entgegen. Wir bitten Sie daher, von weiteren Bewerbungen abzusehen.
 
-Sollte es sich bei Ihrer Nachricht nicht um eine Bewerbung, sondern um eine geschäftliche Anfrage handeln, wurde sie möglicherweise versehentlich als Bewerbung erkannt. Bitte senden Sie Ihre Anfrage in diesem Fall direkt per E-Mail an ${publicReply}.
+Sollte es sich bei Ihrer Nachricht nicht um eine Bewerbung, sondern um eine geschäftliche Anfrage handeln, wurde sie möglicherweise versehentlich als Bewerbung erkannt. Bitte senden Sie Ihre Anfrage in diesem Fall von einer anderen, nicht blockierten E-Mail-Adresse direkt an ${publicReply}.
 
 Mit freundlichen Grüßen
 

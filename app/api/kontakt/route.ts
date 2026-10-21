@@ -22,7 +22,7 @@ export async function POST(req:Request){
       return Response.json({error:APPLICATION_REJECTION},{status:422,headers:noStore});
     }
     const sent=await sendContactMail(name,email,{company,phone,message});
-    if(!sent.owner)return Response.json({error:'Die Nachricht konnte derzeit nicht versendet werden. Bitte versuchen Sie es erneut oder schreiben Sie an post@otto-druck.de.'},{status:503,headers:noStore});
+    if(!sent.owner)return Response.json({error:'Die Nachricht konnte derzeit nicht versendet werden. Bitte versuchen Sie es erneut oder schreiben Sie an webkontakt@otto-druck.de.'},{status:503,headers:noStore});
     return Response.json({sent:true,confirmationSent:sent.customer},{headers:noStore});
   }catch(e){
     if(e instanceof RangeError)return Response.json({error:'Die Nachricht ist zu groß.'},{status:413,headers:noStore});

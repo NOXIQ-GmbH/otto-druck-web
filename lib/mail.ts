@@ -3,9 +3,9 @@ import {WEBSITE_INBOX,PUBLIC_REPLY_EMAIL,contactCategory} from '@/lib/form-routi
 const labels:Record<string,string>={category:'Bedarf',product:'Produkt',quantity:'Auflage',format:'Format',pages:'Seiten',color:'Farbigkeit Vorderseite',printSides:'Bedruckung',backColor:'Farbigkeit Rückseite',material:'Material',grammage:'Grammatur',adhesion:'Haftung',customFormat:'Wunschmaß',orientation:'Ausrichtung',coverMaterial:'Umschlagmaterial',coverGrammage:'Grammatur Umschlag',finishing:'Veredelung',delivery:'Lieferort',dataStatus:'Datenstand',company:'Firma',phone:'Telefon',message:'Weitere Wünsche',reference:'Anfragereferenz',files:'Dateien'};
 type Details=Record<string,string>;
 export async function sendApplicationRejection(email:string) {
-  const config=env as unknown as {BREVO_API_KEY?:string;MAIL_FROM?:string};
-  const from=config.MAIL_FROM||PUBLIC_REPLY_EMAIL;
-  const publicReply='kontakt@heute-druck.de';
+  const config=env as unknown as {BREVO_API_KEY?:string};
+  const from=PUBLIC_REPLY_EMAIL;
+  const publicReply=PUBLIC_REPLY_EMAIL;
   if(!config.BREVO_API_KEY){console.error('Application rejection mail not configured');return false;}
   const textContent=`Guten Tag,
 
@@ -33,10 +33,10 @@ E-Mail: ${publicReply}`;
 }
 
 export async function sendIntakeMail(id:string,name:string,email:string,details:Details,kind='Anfrage') {
-  const config=env as unknown as {BREVO_API_KEY?:string;MAIL_FROM?:string;WEBSITE_MAIL_TO?:string;PUBLIC_CONTACT_EMAIL?:string;PUBLIC_SITE_URL?:string};
-  const from=config.MAIL_FROM||PUBLIC_REPLY_EMAIL;
-  const to=config.WEBSITE_MAIL_TO?.trim()||WEBSITE_INBOX;
-  const publicReply=config.PUBLIC_CONTACT_EMAIL?.trim()||PUBLIC_REPLY_EMAIL;
+  const config=env as unknown as {BREVO_API_KEY?:string;PUBLIC_SITE_URL?:string};
+  const from=PUBLIC_REPLY_EMAIL;
+  const to=WEBSITE_INBOX;
+  const publicReply=PUBLIC_REPLY_EMAIL;
   if(!config.BREVO_API_KEY){console.error('Intake mail not configured',id);return {owner:false,customer:false};}
   let base='https://otto-druck-web.noxiq-gmbh.workers.dev';
   if(config.PUBLIC_SITE_URL){try{const u=new URL(config.PUBLIC_SITE_URL);if(u.protocol==='https:')base=u.origin;}catch{}}
@@ -67,10 +67,10 @@ export async function sendIntakeMail(id:string,name:string,email:string,details:
 
 
 export async function sendContactMail(name:string,email:string,details:{company:string;phone:string;message:string}) {
-  const config=env as unknown as {BREVO_API_KEY?:string;MAIL_FROM?:string;WEBSITE_MAIL_TO?:string;PUBLIC_CONTACT_EMAIL?:string};
-  const from=config.MAIL_FROM||PUBLIC_REPLY_EMAIL;
-  const to=config.WEBSITE_MAIL_TO?.trim()||WEBSITE_INBOX;
-  const publicReply=config.PUBLIC_CONTACT_EMAIL?.trim()||PUBLIC_REPLY_EMAIL;
+  const config=env as unknown as {BREVO_API_KEY?:string};
+  const from=PUBLIC_REPLY_EMAIL;
+  const to=WEBSITE_INBOX;
+  const publicReply=PUBLIC_REPLY_EMAIL;
   if(!config.BREVO_API_KEY){console.error('Contact mail not configured');return {owner:false,customer:false};}
   async function send(recipient:string,subject:string,textContent:string,replyTo:string){
     try{

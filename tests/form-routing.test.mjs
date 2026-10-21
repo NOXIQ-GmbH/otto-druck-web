@@ -1,9 +1,9 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {WEBSITE_INBOX,PUBLIC_REPLY_EMAIL,isUnwantedJobApplication,contactCategory} from '../lib/form-routing.ts';
-test('separate website inbox and public reply address',()=>{
+test('use the definitive website contact address throughout',()=>{
   assert.equal(WEBSITE_INBOX,'webkontakt@otto-druck.de');
-  assert.equal(PUBLIC_REPLY_EMAIL,'post@otto-druck.de');
+  assert.equal(PUBLIC_REPLY_EMAIL,'webkontakt@otto-druck.de');
 });
 test('identify specific unsolicited applications',()=>{
   assert.equal(isUnwantedJobApplication('name@firemail.de','Ich bewerbe mich als Mitarbeiter.'),true);

@@ -1,4 +1,5 @@
 import {sendContactMail} from '@/lib/mail';
+import {isUnwantedJobApplication,APPLICATION_REJECTION} from '@/lib/form-routing';
 import {textField,validContact,checkRequest,rateKey,limited,noStore,boundedBody} from '@/lib/intake';
 
 export async function POST(req:Request){
@@ -14,6 +15,7 @@ export async function POST(req:Request){
     const phone=textField(data.phone,60);
     const message=textField(data.message,4000);
     if(!validContact(name,email)||!message)return Response.json({error:'Bitte ergänzen Sie Name, gültige E-Mail-Adresse und Nachricht.'},{status:400,headers:noStore});
+    if(isUnwantedJobApplication(email,message))return Response.json({error:APPLICATION_REJECTION},{status:422,headers:noStore});
     const key=await rateKey(req);
     if(await limited(key))return Response.json({error:'Zu viele Anfragen. Bitte versuchen Sie es später erneut oder rufen Sie uns an.'},{status:429,headers:noStore});
     const sent=await sendContactMail(name,email,{company,phone,message});

@@ -2,7 +2,9 @@ declare namespace Cloudflare {
   interface Env {
     BREVO_API_KEY?: string;
     MAIL_FROM?: string;
-    MAIL_TO?: string;
+    MAIL_TO?: string; // Legacy configuration, no longer used for website forms.
+    WEBSITE_MAIL_TO?: string;
+    PUBLIC_CONTACT_EMAIL?: string;
     PUBLIC_SITE_URL?: string;
     DB?: D1Database;
     BUCKET?: R2Bucket;

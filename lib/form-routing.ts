@@ -1,6 +1,6 @@
 /** Website-form delivery and deliberately conservative application filtering. */
 export const WEBSITE_INBOX = 'webkontakt@otto-druck.de';
-export const PUBLIC_REPLY_EMAIL = 'post@otto-druck.de';
+export const PUBLIC_REPLY_EMAIL = 'webkontakt@otto-druck.de';
 
 export function isUnwantedJobApplication(email: string, ...fields: string[]): boolean {
   if (email.trim().toLowerCase().split('@')[1] !== 'firemail.de') return false;

@@ -2,6 +2,36 @@ import {env} from 'cloudflare:workers';
 import {WEBSITE_INBOX,PUBLIC_REPLY_EMAIL,contactCategory} from '@/lib/form-routing';
 const labels:Record<string,string>={category:'Bedarf',product:'Produkt',quantity:'Auflage',format:'Format',pages:'Seiten',color:'Farbigkeit Vorderseite',printSides:'Bedruckung',backColor:'Farbigkeit Rückseite',material:'Material',grammage:'Grammatur',adhesion:'Haftung',customFormat:'Wunschmaß',orientation:'Ausrichtung',coverMaterial:'Umschlagmaterial',coverGrammage:'Grammatur Umschlag',finishing:'Veredelung',delivery:'Lieferort',dataStatus:'Datenstand',company:'Firma',phone:'Telefon',message:'Weitere Wünsche',reference:'Anfragereferenz',files:'Dateien'};
 type Details=Record<string,string>;
+export async function sendApplicationRejection(email:string) {
+  const config=env as unknown as {BREVO_API_KEY?:string;MAIL_FROM?:string;PUBLIC_CONTACT_EMAIL?:string};
+  const from=config.MAIL_FROM||PUBLIC_REPLY_EMAIL;
+  const publicReply=config.PUBLIC_CONTACT_EMAIL?.trim()||PUBLIC_REPLY_EMAIL;
+  if(!config.BREVO_API_KEY){console.error('Application rejection mail not configured');return false;}
+  const textContent=`Guten Tag,
+
+vielen Dank für Ihre Nachricht.
+
+OTTO-Druck nimmt derzeit keine Bewerbungen entgegen. Wir bitten Sie daher, von weiteren Bewerbungen abzusehen.
+
+Sollte es sich bei Ihrer Nachricht nicht um eine Bewerbung, sondern um eine geschäftliche Anfrage handeln, wurde sie möglicherweise versehentlich als Bewerbung erkannt. Bitte senden Sie Ihre Anfrage in diesem Fall direkt per E-Mail an ${publicReply}.
+
+Mit freundlichen Grüßen
+
+OTTO-Druck – eine Marke der NOXIQ GmbH
+Meschwitzstraße 1
+01099 Dresden
+E-Mail: ${publicReply}`;
+  try{
+    const response=await fetch('https://api.brevo.com/v3/smtp/email',{
+      method:'POST',signal:AbortSignal.timeout(10000),
+      headers:{'api-key':config.BREVO_API_KEY,'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({sender:{name:'OTTO-Druck',email:from},to:[{email}],replyTo:{email:publicReply},subject:'OTTO-Druck – Hinweis zu Bewerbungen',textContent})
+    });
+    if(!response.ok){console.error('Application rejection mail rejected',response.status);return false;}
+    return true;
+  }catch{console.error('Application rejection mail unavailable');return false;}
+}
+
 export async function sendIntakeMail(id:string,name:string,email:string,details:Details,kind='Anfrage') {
   const config=env as unknown as {BREVO_API_KEY?:string;MAIL_FROM?:string;WEBSITE_MAIL_TO?:string;PUBLIC_CONTACT_EMAIL?:string;PUBLIC_SITE_URL?:string};
   const from=config.MAIL_FROM||PUBLIC_REPLY_EMAIL;

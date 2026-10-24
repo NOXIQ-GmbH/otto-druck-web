@@ -88,7 +88,7 @@ export async function sendContactMail(name:string,email:string,details:{company:
   const safePhone=details.phone.replace(/[\r\n\t]+/g,' ').trim();
   const safeMessage=details.message.trim();
   const greeting=safeName ? `Guten Tag ${safeName},` : 'Guten Tag,';
-  const signature=`Mit besten Grüßen\n\nOTTO-Druck – eine Marke der NOXIQ GmbH\nMeschwitzstraße 1\n01099 Dresden\nMobil: 01 76 – 80 250 200\nTel.: 03 51 – 501 49 04\nE-Mail: ${publicReply}`;
+  const signature=`Mit besten Grüßen\n\nOTTO-Druck – eine Marke der NOXIQ GmbH\nMeschwitzstraße 1\n01099 Dresden\nMobil: 01 76 – 85 250 200\nTel.: 03 51 – 501 49 04\nE-Mail: ${publicReply}`;
   const ownerText=`Neue Kontaktanfrage über otto-druck.de\n\nName: ${safeName}\nFirma: ${safeCompany||'nicht angegeben'}\nE-Mail: ${email}\nTelefon: ${safePhone||'nicht angegeben'}\n\nNachricht:\n${safeMessage}`;
   const customerText=`${greeting}\n\nvielen Dank für Ihre Nachricht an OTTO-Druck. Wir haben Ihre Anfrage erhalten und melden uns persönlich bei Ihnen.\n\nIhre Nachricht:\n${safeMessage}\n\n${signature}`;
   const [owner,customer]=await Promise.all([

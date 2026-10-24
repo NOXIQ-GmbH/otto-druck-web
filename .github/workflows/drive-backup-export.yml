@@ -1,0 +1,21 @@
+name: Drive backup export
+on:
+  push:
+    branches:
+      - backup-export-2026-10-24
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 9429720487d0f258d5f57529b59adbf6075a152e
+          fetch-depth: 0
+      - name: Create exact source archive
+        run: git archive --format=zip --output="$RUNNER_TEMP/OTTO-Druck_Web_2026-10-24_9429720.zip" 9429720487d0f258d5f57529b59adbf6075a152e
+      - uses: actions/upload-artifact@v4
+        with:
+          name: OTTO-Druck_Web_2026-10-24_9429720
+          path: ${{ runner.temp }}/OTTO-Druck_Web_2026-10-24_9429720.zip
+          retention-days: 1
+          if-no-files-found: error

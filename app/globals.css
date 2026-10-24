@@ -101,3 +101,14 @@ body:has(.cookie-banner) .back-to-top{visibility:hidden}
 .privacy-saved{margin:0!important;font-size:.76rem;color:#667178;text-align:center}
 @media(max-width:760px){.privacy-categories{grid-template-columns:1fr 1fr}.privacy-category{min-height:175px;border-top:1px solid #d8dee2}.privacy-category:nth-child(odd){border-left:0}.privacy-category:nth-child(-n+2){border-top:0}}
 @media(max-width:480px){.cookie-banner{bottom:max(10px,env(safe-area-inset-bottom));width:calc(100% - 20px);padding:21px 18px 17px}.cookie-banner>p{font-size:.82rem}.cookie-actions button{width:100%;font-size:.8rem}.privacy-dialog{padding:27px 20px 22px;max-width:calc(100vw - 20px)!important;max-height:calc(100dvh - 20px)}.privacy-categories{grid-template-columns:1fr}.privacy-category{min-height:116px;flex:none;border-left:0;border-top:1px solid #d8dee2}.privacy-category:nth-child(2){border-top:1px solid #d8dee2}.privacy-actions{flex-direction:column}.privacy-actions>*{width:100%;flex:auto}.privacy-dialog [data-slot=dialog-title]{font-size:1.55rem}.privacy-close{width:38px;height:38px;flex-basis:38px}}
+
+
+.header-account-wrap{position:relative;flex-shrink:0}
+.header-split .account-trigger{display:flex;align-items:center;justify-content:center;min-height:48px;width:auto;margin:0;padding:12px 17px;border:0;border-left:1px solid #ffffff4d;border-radius:0;background:transparent;color:#fff;font:inherit;font-weight:700;line-height:1.2;white-space:nowrap;cursor:pointer;transition:background .2s,color .2s}
+.header-split .account-trigger:hover,.header-split .account-trigger:focus-visible,.header-split .account-trigger[aria-expanded="true"]{background:var(--magenta);color:#fff}
+.account-dropdown{position:absolute;z-index:60;top:calc(100% + 9px);right:0;min-width:190px;padding:8px;background:#fff;border:1px solid #dce2e7;border-radius:12px;box-shadow:0 14px 35px #11182026}
+.account-dropdown a{display:block;padding:11px 13px;border-radius:8px;color:var(--ink);font-size:.86rem;font-weight:700;text-decoration:none;white-space:nowrap}
+.account-dropdown a:hover,.account-dropdown a:focus-visible{background:#f1f5f7}
+.account-dropdown .account-logout{color:#b5164e}
+@media(max-width:1180px){.header-split .account-trigger{min-height:46px;padding:11px 13px}}
+@media(max-width:640px){.header-split .account-trigger{min-height:43px;padding:9px 11px}.account-dropdown{right:0;min-width:176px}}

@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:OTTO-Druck
+N:OTTO-Druck;;;;
+ORG:NOXIQ GmbH;OTTO-Druck
+TEL;TYPE=WORK,VOICE:+493515014904
+TEL;TYPE=CELL,WORK,VOICE:+4917685250200
+EMAIL;TYPE=INTERNET,WORK:webkontakt@otto-druck.de
+ADR;TYPE=WORK:;;Meschwitzstraße 1;Dresden;;01099;Deutschland
+URL:https://otto-druck.de/
+END:VCARD
